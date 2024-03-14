@@ -2,7 +2,7 @@ module Decoder_test;
     //logic enable;
     logic [3:0] in;
     logic [7:0] out;
-    Decoder #(3) DUT(in[2:0], in[3], out);
+    Decoder #(8) DUT(in[2:0], in[3], out);
     initial begin
 
       $monitor ($time,
@@ -22,8 +22,6 @@ module Decoder_test;
 
 
   endmodule: Decoder_test
-
-
 
 
   module BarrelShifter_test;
@@ -65,7 +63,7 @@ module Decoder_test;
     logic [7:0] I;
     logic [2:0] S;
     logic Y;
-    Multiplexer #(3) DUT(I, S, Y);
+    Multiplexer #(8) DUT(I, S, Y);
     initial begin
       $monitor ($time, "I = %b, S = %b, Y = %b", I, S, Y);
       I = 8'd15;
@@ -105,6 +103,7 @@ module Decoder_test;
 
 
   endmodule: Multiplexer_test
+
 
 
 
