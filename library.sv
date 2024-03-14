@@ -1,11 +1,12 @@
 `default_nettype none
 
+
 module Decoder
-    #(parameter WIDTH = 8)
+    #(parameter WIDTH = 16)
     (
-    input logic [WIDTH-1:0] I,
+    input logic [$clog2(WIDTH)-1:0] I,
     input logic enable,
-    output logic [2**WIDTH-1:0] D);
+    output logic [WIDTH-1:0] D);
       always_comb begin
         if (enable == 0) begin
             D = '0;
@@ -26,6 +27,7 @@ module Decoder
         end
       end
     endmodule: Decoder
+
 
     module BarrelShifter
     #(parameter WIDTH = 8)
@@ -56,10 +58,10 @@ module Decoder
       end
     endmodule: BarrelShifter
 
-    module Multiplexer
-    #(parameter WIDTH = 8)
-    (input logic [2**WIDTH-1:0] I,
-    input logic [WIDTH-1:0] S,
+   module Multiplexer
+    #(parameter WIDTH = 32)
+    (input logic [WIDTH-1:0] I,
+    input logic [$clog2(WIDTH)-1:0] S,
     output logic Y);
       always_comb begin
         /*unique case (S)
@@ -76,6 +78,7 @@ module Decoder
         assign Y = I[S];
       end
     endmodule: Multiplexer
+
 
     module Mux2to1
         #(parameter WIDTH = 3)
